@@ -1,0 +1,74 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+int matrix[5][5];
+void addedge(int u,int v,int weight)
+{
+    matrix[u][v]=weight;
+    matrix[v][u]=weight;
+}
+void print()
+{
+    for(int i=0;i<5;i++)
+    {
+        cout<<"\n";
+        for(int j=0;j<5;j++)
+        {
+            cout<<matrix[i][j]<<" ";
+        }
+    }
+}
+void prims()
+{
+    int data[5];
+    int parent[5];
+    bool mstset[5];
+    for(int i=0;i<5;i++)
+    {
+        data[i]=9999;
+        parent[i]=-1;
+        mstset[i]=false;
+    }
+    data[0]=0;
+    parent[0]=-1;
+    for(int count=0;count<4;count++)
+    {
+        int mini=9999,u;
+        for(int v=0;v<5;v++)
+        {
+            if(mstset[v]==false&&data[v]<mini)
+            {
+                mini=data[v];
+                u=v;
+            }
+        
+        }
+        mstset[u]=true;
+        for(int j=0;j<5;j++)
+        {
+            if(matrix[u][j]!=0&&mstset[j]==false&&matrix[u][j]<data[j])
+            {
+                data[j]=matrix[u][j];
+                parent[j]=u;
+            }
+        }
+    }
+    for(int k=1;k<5;k++)
+    {
+        cout<<parent[k]<<k<<matrix[k][parent[k]];
+    }
+    
+}
+int main()
+{
+    addedge(0,1,4);
+    addedge(0,4,6);
+    addedge(1,2,7);
+    addedge(1,3,3);
+    addedge(1,4,5);
+    addedge(4,3,8);
+    addedge(3,2,1);
+    print();
+    cout<<"\n";
+    prims();
+}
