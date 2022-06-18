@@ -1,0 +1,35 @@
+// Online GDB compiler to run C++ program online
+#include <iostream>
+#include <vector>
+using namespace std;
+void addedge(vector<int>adj[],int u,int v)
+{
+  adj[u].push_back(v);
+  adj[v].push_back(u);
+}
+void print(vector<int>adj[],int n)
+{
+    for(int i=0;i<n;i++)
+    {
+        cout<<"for vertex"<<i;
+        cout<<"\n"<<i;
+        for(auto j:adj[i])
+        {
+            cout<<"->"<<j;
+        }
+        cout<<"\n";
+    }
+}
+int main()
+{
+    int n=5;
+    vector<int>adj[n];
+    addedge(adj,0,1);
+    addedge(adj,0,4);
+    addedge(adj,1,2);
+    addedge(adj,1,3);
+    addedge(adj,1,4);
+    addedge(adj,4,3);
+    addedge(adj,3,2);
+    print(adj,n);
+}
