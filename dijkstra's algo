@@ -1,0 +1,52 @@
+// Online C++ compiler to run C++ program online dijkstra algorithm
+#include <iostream>
+using namespace std;
+
+int graph[][5]={{0,4,0,0,6},
+                {4,0,7,3,5},
+                {0,7,0,1,0},
+                {0,3,1,0,8},
+                {6,5,0,8,0}};
+void dijikstra()
+{
+    int key[5];
+    bool mstset[5];
+    
+    for(int i=0;i<5;i++)
+    {
+        key[i]=9999;
+        mstset[i]=false;
+    }
+    key[0]=0;
+    
+    for(int v=0;v<5-1;v++)
+    {
+        int mini=9999;
+        int u;
+        for(int j=0;j<5;j++)
+        {
+            if(mstset[j]==false&&key[j]<mini)
+            {
+                mini=key[j];
+                u=j;
+            }
+        }
+        mstset[u]=true;
+        
+        for(int l=0;l<5;l++)
+        {
+            if(mstset[l]==false && graph[u][l]!=0&&key[u]!=9999&&key[u]+graph[u][l]<key[l])
+            {
+                key[l]=key[u]+graph[u][l];
+            }
+        }
+    }
+    for(int k=0;k<5;k++)
+    {
+        cout<<k<<"   "<<key[k]<<endl;
+    }
+}
+int main() 
+{
+    dijikstra();  
+}
