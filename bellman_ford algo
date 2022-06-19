@@ -1,0 +1,37 @@
+#include <iostream>
+using namespace std;
+int V=5;
+int E=8;
+int graph[][3]={ { 0, 1, -1 }, { 0, 2, 4 },
+                       { 1, 2, 3 }, { 1, 3, 2 },
+                       { 1, 4, 2 }, { 3, 2, 5 },
+                       { 3, 1, 1 }, { 4, 3, -3 } };
+
+void bellman_ford()
+{
+    int dist[V];
+    for(int i=0;i<V;i++)
+    {
+        dist[i]=9999;
+    }
+    dist[0]=0;
+    for(int v=0;v<V-1;v++)
+    {
+        for(int e=0;e<E;e++)
+        {
+            if(dist[graph[e][0]]!=9999&&dist[graph[e][0]]+graph[e][2]<dist[graph[e][1]])
+            {
+                dist[graph[e][1]]=dist[graph[e][0]]+graph[e][2];
+            }
+        }
+    }
+
+for(int q=0;q<V;q++)
+{
+    cout<<q<<"   "<<dist[q]<<endl;
+}
+}
+int main() 
+{
+    bellman_ford();  
+}
